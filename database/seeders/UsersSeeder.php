@@ -20,6 +20,8 @@ class UsersSeeder extends Seeder
                 "email_verified_at" => now(),
             ]
         ];
+        User::factory()->count(50)->create();
+        
         foreach($users as $user){
             User::create($user);
         }
