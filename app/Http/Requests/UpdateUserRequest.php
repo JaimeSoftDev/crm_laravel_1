@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -28,13 +29,18 @@ class UpdateUserRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                'unique:users,email,' . $this->user->id
+                // 'unique:users,email,' . $this->user->id
+                Rule::unique('users')->ignore($this->user->id)
             ],
             'password' => [
-                
                 'confirmed',
                 'min:8'
             ],
         ];
+    }
+    protected function prepareForValidation(){
+        if($this->password===null){
+            $this->request->remove('password');
+        }
     }
 }
