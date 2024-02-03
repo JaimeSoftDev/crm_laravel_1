@@ -32,9 +32,10 @@
         @include ('layouts.partials.footer')
     </div>
 
+    <!-- El script para le boton del sidebar 
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <script src="{{asset('js/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('js/adminlte.min.js')}}"></script>
-
     <script src="https://cdn.datatables.net/v/bs4-4.6.0/jq-3.7.0/dt-1.13.8/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -47,7 +48,22 @@
     <script>
         $(document).ready(function () {
             flatpickr(".date", {
-                "locale": "es"
+                "locale": "es",
+                dateFormat: "d/m/Y",
+
+            });
+            Object.assign(DataTable.defaults, {
+                "language": {
+                    "url": "http://cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json"
+                },
+                columnDefs: [
+                    {
+                        targets: -1,
+                        searching: false,
+                        orderable: false
+                    },
+                ]
+
             });
             $('.select2').select2();
         })

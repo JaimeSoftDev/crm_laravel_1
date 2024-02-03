@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -48,5 +49,10 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function tasks(){
         return $this->hasMany(Task::class);
+    }
+    public function setPasswordAttribute($input){
+        if($input){
+            $this->attributes['password']= app('hash')->needsRehash($input)?Hash::make($input) : $input;
+        }
     }
 }
