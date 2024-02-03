@@ -26,7 +26,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{route('admin.projects.create')}}" class='btn btn-primary mb-3'>Nuevo projecto</a>
+                        <a href="{{route('admin.projects.create')}}" class='btn btn-primary mb-3'>Nuevo proyecto</a>
                         <table class="table table-bordered" id='project_table'>
                             <thead>
                                 <tr>

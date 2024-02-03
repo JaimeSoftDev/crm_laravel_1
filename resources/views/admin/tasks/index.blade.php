@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Listado de usuarios</h1>
+                <h1 class="m-0">Listado de tareas</h1>
             </div>
 
             @if(session('success'))
@@ -26,28 +26,37 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{route('admin.users.create')}}" class='btn btn-primary mb-3'>Nuevo usuario</a>
-                        <table class="table table-bordered" id='user_table'>
+                        <a href="{{route('admin.tasks.create')}}" class='btn btn-primary mb-3'>Nueva tarea</a>
+                        <table class="table table-bordered" id='task_table'>
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Email</th>
-                                    <th>Fecha verificación email</th>
+                                    <th>Nombre de la tarea</th>
+                                    <th>Descripción de la tarea</th>
+                                    <th>Fecha límite</th>
+                                    <th>Estado</th>
+                                    <th>Proyecto</th>
+                                    <th>Encargado</th>
+                                    <th>Cliente</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($tasks as $task)
                                 <tr>
-                                    <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->email_verified_at}}</td>
+                                    <td>{{$task->name}}</td>
+                                    <td>{{$task->description}}</td>
+                                    <td>{{$task->deadline}}</td>
+                                    <td>{{$task->task_status}}</td>
+                                    <td>{{$task->project->name}}</td>
+                                    <td>{{$task->user->name}}</td>
+                                    <td>{{$task->client->contact_name}}</td>
                                     <td>
-                                        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-success">
+                                        <a href="{{ route('admin.tasks.edit', $task->id) }}"
+                                            class="btn btn-success">
                                             Editar
                                         </a>
-                                        <form action="{{ route('admin.users.destroy', $user->id) }}" id="delete_form"
-                                            method="POST"
+                                        <form action="{{ route('admin.tasks.destroy', $task->id) }}"
+                                            id="delete_form" method="POST"
                                             onsubmit="return confirm('Esta seguro que desea eliminar el registro?')"
                                             style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
@@ -70,7 +79,8 @@
 @endsection
 @section('scripts')
 <script>
-    $(document ). ready( fu nction () {
-        $('#user_table').Da    });
+    $(document).ready(function() {
+        $('#task_table').DataTable();
+    });
 </script>
 @endsection

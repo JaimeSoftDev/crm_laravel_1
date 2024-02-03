@@ -19,6 +19,9 @@ class Task extends Model
         "client_id",
         "project_id",
     ];
+
+    public const STATUS = ['Abierto', 'En curso', 'Cancelado', 'Completado'];
+    
     public function user(){
         return $this->belongsTo(User::class)->withDefault();
     }
